@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>jsTree test</title>
+  <!-- 2 load the theme CSS file -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+</head>
+<body ng-app="app">
+    <div ng-controller="ctrl">
+        <!-- 3 setup a container element -->
+        <div tree>
+            <!-- in this example the tree is populated from inline HTML -->
+            <ul>
+            <li>Root node 1
+                <ul>
+                <li id="child_node_1">
+                    <span>
+                        Child node 1
+                        <input type="text" />
+                    </span>
+                </li>
+                <li>Child node 2</li>
+                </ul>
+            </li>
+            <li>Root node 2</li>
+            </ul>
+        </div>
+        <button>demo button</button>
+    </div>
+  
+
+  <!-- Angular JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular.min.js"></script>
+  <!-- 4 include the jQuery library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+  <!-- 5 include the minified jstree source -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+  
+  <script>
+      var app = angular.module("app",[]);
+      app.controller("ctrl",function($scope){
+          
+      });
+      app.directive("tree", [function(){
+        return{
+            restrict: 'A',
+            link: function(scope, elem, attrs, ){
+                $(elem).jstree();
+                $(elem).on("changed.jstree", function (e, data) {
+                    console.log(data.selected);
+                });
+            }
+        };
+      }]);
+    
+  </script>
+</body>
+</html>
